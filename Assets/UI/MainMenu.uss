@@ -1,0 +1,18 @@
+.MenuLayout {
+    height: 100%;
+    flex-direction: row-reverse;
+}
+
+.PanelBackground {
+    background-color: rgb(26, 23, 23);
+}
+
+.Header1 {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 255);
+}
+
+.DefaultText {
+    color: rgba(255, 255, 255, 255);
+    font-size: 12px;
+}
