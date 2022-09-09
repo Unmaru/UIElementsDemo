@@ -45,6 +45,11 @@
     font-size: 16px;
 }
 
+.TextField:focus > .unity-base-field__label {
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+}
+
 .TextField > .unity-base-field__input {
     width: 95%;
     min-width: 0;
