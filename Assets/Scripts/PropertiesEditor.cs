@@ -116,9 +116,11 @@ namespace DeviceControlSystem
                     var xField = xFieldContent.Q<TextField>("FloatField");
                     xField.value = oldValue.x.ToString();
                     xField.RegisterValueChangedCallback((newValue) =>
-                    {                    
-                        oldValue.x = float.Parse(newValue.newValue);
-                        p.SetValue(oldValue);
+                    {
+                        if (float.TryParse(newValue.newValue, out oldValue.x))
+                        {
+                            p.SetValue(oldValue);
+                        }
                     });
 
                     var yFieldContent = editor.Q("FieldY");
@@ -126,8 +128,10 @@ namespace DeviceControlSystem
                     yField.value = oldValue.y.ToString();
                     yField.RegisterValueChangedCallback((newValue) =>
                     {
-                        oldValue.y = float.Parse(newValue.newValue);
-                        p.SetValue(oldValue);
+                        if (float.TryParse(newValue.newValue, out oldValue.y))
+                        {
+                            p.SetValue(oldValue);
+                        }
                     });
 
                     var zFieldContent = editor.Q("FieldZ");
@@ -135,8 +139,10 @@ namespace DeviceControlSystem
                     zField.value = oldValue.z.ToString();
                     zField.RegisterValueChangedCallback((newValue) =>
                     {
-                        oldValue.z = float.Parse(newValue.newValue);
-                        p.SetValue(oldValue);
+                        if (float.TryParse(newValue.newValue, out oldValue.z))
+                        {
+                            p.SetValue(oldValue);
+                        }
                     });
 
                     var xCurrentValue = xFieldContent.Q<Label>("Value");
