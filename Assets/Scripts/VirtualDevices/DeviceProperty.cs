@@ -16,18 +16,22 @@ namespace DeviceControlSystem.Devices
 	}
 	public class DeviceProperty<T> : DeviceProperty 
 	{
-		public T Value;
-		public T EditedValue;
+		public T Value { get { return _value; } set { SetOldValue(value); } }
+		public T EditedValue { get { return _editedValue; } set { SetValue(value); } }
+
+		private T _value;
+		private T _editedValue;
+
 		public void SetValue(T value)
 		{
-			EditedValue = value;
+			_editedValue = value;
 			IsDirty = true;
 			OnPropertyChanged?.Invoke(this);
 		}
 
 		public void SetOldValue(T value)
 		{
-			Value = value;
+			_value = value;
 			OnPropertyChanged?.Invoke(this);
 		}
 	}

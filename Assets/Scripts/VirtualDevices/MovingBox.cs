@@ -37,7 +37,6 @@ namespace DeviceControlSystem.Devices
 		private void Move(Vector3 position)
 		{
 			State = ActionState.Moving; // We can issue a new movement command even if the object is already moving
-			_targetPosition.EditedValue = position;
 		}
 
 		private void FixedUpdate()
