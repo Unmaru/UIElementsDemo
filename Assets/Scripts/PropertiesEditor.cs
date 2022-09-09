@@ -112,21 +112,26 @@ namespace DeviceControlSystem
                 case "Vector3Simple":
                     DeviceProperty<Vector3> p = (DeviceProperty<Vector3>)property;
                     Vector3 oldValue = p.EditedValue;
-                    var xField = editor.Q("FieldX").Q<TextField>("FloatField");
+                    var xFieldContent = editor.Q("FieldX");
+                    var xField = xFieldContent.Q<TextField>("FloatField");
                     xField.value = oldValue.x.ToString();
                     xField.RegisterValueChangedCallback((newValue) =>
                     {                    
                         oldValue.x = float.Parse(newValue.newValue);
                         p.SetValue(oldValue);
                     });
-                    var yField = editor.Q("FieldY").Q<TextField>("FloatField");
+
+                    var yFieldContent = editor.Q("FieldY");
+                    var yField = yFieldContent.Q<TextField>("FloatField");
                     yField.value = oldValue.y.ToString();
                     yField.RegisterValueChangedCallback((newValue) =>
                     {
                         oldValue.y = float.Parse(newValue.newValue);
                         p.SetValue(oldValue);
                     });
-                    var zField = editor.Q("FieldZ").Q<TextField>("FloatField");
+
+                    var zFieldContent = editor.Q("FieldZ");
+                    var zField = zFieldContent.Q<TextField>("FloatField");
                     zField.value = oldValue.z.ToString();
                     zField.RegisterValueChangedCallback((newValue) =>
                     {
@@ -134,12 +139,20 @@ namespace DeviceControlSystem
                         p.SetValue(oldValue);
                     });
 
+                    var xCurrentValue = xFieldContent.Q<Label>("Value");
+                    var yCurrentValue = yFieldContent.Q<Label>("Value");
+                    var zCurrentValue = zFieldContent.Q<Label>("Value");
+
                     Action<DeviceProperty> onValueChange = (p) =>
                     {
                         var changedProperty = (DeviceProperty<Vector3>)p;
                         xField.value = changedProperty.EditedValue.x.ToString();
                         yField.value = changedProperty.EditedValue.y.ToString();
                         zField.value = changedProperty.EditedValue.z.ToString();
+
+                        xCurrentValue.text = changedProperty.Value.x.ToString("N5");
+                        yCurrentValue.text = changedProperty.Value.y.ToString("N5");
+                        zCurrentValue.text = changedProperty.Value.z.ToString("N5");
                     };
 
                     p.OnPropertyChanged += onValueChange;

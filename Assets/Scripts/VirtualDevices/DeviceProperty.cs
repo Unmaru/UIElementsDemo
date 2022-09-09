@@ -24,5 +24,11 @@ namespace DeviceControlSystem.Devices
 			IsDirty = true;
 			OnPropertyChanged?.Invoke(this);
 		}
+
+		public void SetOldValue(T value)
+		{
+			Value = value;
+			OnPropertyChanged?.Invoke(this);
+		}
 	}
 }
