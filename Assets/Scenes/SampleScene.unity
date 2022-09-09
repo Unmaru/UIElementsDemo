@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0
+  _position: {x: 0, y: 0, z: 0}
 --- !u!4 &306201600
 Transform:
   m_ObjectHideFlags: 0
@@ -336,6 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0
+  _position: {x: 0, y: 0, z: 0}
 --- !u!4 &904533670
 Transform:
   m_ObjectHideFlags: 0
@@ -480,6 +482,7 @@ GameObject:
   - component: {fileID: 1213618197}
   - component: {fileID: 1213618198}
   - component: {fileID: 1213618199}
+  - component: {fileID: 1213618200}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -534,6 +537,25 @@ MonoBehaviour:
   _deviceEntryTemplate: {fileID: 9197481963319205126, guid: db9486e9698f55649b6ec1e6009ff4fb, type: 3}
   _listName: DeviceList
   _labelName: DeviceName
+--- !u!114 &1213618200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213618196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df4d0765602a3ba418452a0fb13e9eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _document: {fileID: 1213618198}
+  _deviceNotSelectedLabelName: NoDeviceMessage
+  _propertyListName: PropertyList
+  _editorTemplates:
+  - {fileID: 9197481963319205126, guid: a08d619ce328ac04ab1f2acb5d7862d0, type: 3}
+  - {fileID: 9197481963319205126, guid: 835804eaffb69fd4b9f7dad0fdf2742a, type: 3}
+  - {fileID: 9197481963319205126, guid: 861910055e15f8a40be2ea1cfa3ac821, type: 3}
 --- !u!1 &1730438433
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,3 +668,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0
+  _position: {x: 0, y: 0, z: 0}

@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Vector1Simple" src="project://database/Assets/UI/PropertyEditors/Vector1Simple.uxml?fileID=9197481963319205126&amp;guid=a08d619ce328ac04ab1f2acb5d7862d0&amp;type=3#Vector1Simple" />
+    <ui:Instance template="Vector1Simple" name="FieldX">
+        <AttributeOverrides element-name="FloatField" label="X" value="0" text="0" />
+    </ui:Instance>
+    <ui:Instance template="Vector1Simple" name="FieldY">
+        <AttributeOverrides element-name="FloatField" label="Y" value="0" text="0" />
+    </ui:Instance>
+    <ui:Instance template="Vector1Simple" name="FieldZ">
+        <AttributeOverrides element-name="FloatField" label="Z" value="0" text="0" />
+    </ui:Instance>
+</ui:UXML>

@@ -13,7 +13,8 @@ namespace DeviceControlSystem.Devices
 
         public int Id { get; private set; }
 
-        public abstract void ExecuteCommand(string name, object args);
+        public abstract void SetupProperties();
+        public abstract List<DeviceProperty> GetProperties();
 
 		private void Start()
 		{
@@ -26,7 +27,8 @@ namespace DeviceControlSystem.Devices
 
         private void Init()
 		{
-            Id = DeviceController.Instance.RegisterDevice(this);
+            SetupProperties();
+            Id = DeviceController.Instance.RegisterDevice(this);           
 		}
 
         private void Destroy()

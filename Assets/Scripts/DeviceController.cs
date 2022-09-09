@@ -12,8 +12,9 @@ namespace DeviceControlSystem
         static public DeviceController Instance { get; private set; }
 		static public Action OnDeviceControllerInitialized;
 
-		public Action<int, VirtualDevice> OnAddDevice;
-		public Action<int> OnRemoveDevice;
+		public Action<int, VirtualDevice> OnAddDevice; // Device id, device
+		public Action<int> OnRemoveDevice; // Device id
+		public Action<int> OnSelectedDeviceChanged; //Device id
 
 		private Dictionary<int, VirtualDevice> _devices = new Dictionary<int, VirtualDevice>();
 

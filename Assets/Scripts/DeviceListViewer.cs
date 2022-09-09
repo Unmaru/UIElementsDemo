@@ -42,6 +42,18 @@ namespace DeviceControlSystem
             _listView.makeItem = makeItem;
             _listView.bindItem = bindItem;
             _listView.itemsSource = _displayedDevicesIds;
+
+            _listView.onSelectionChange += objects => //objects contains a list with ints representing VirtualDevice Id if any selected
+            {
+                if (objects != null)
+                {
+                    var l = (List<object>)objects;
+                    if (l.Count > 0)
+                    {
+                        dc.OnSelectedDeviceChanged?.Invoke((int)l[0]);
+                    }
+                }
+            };
         }
 
         private void OnAddDevice(int id, VirtualDevice device)
@@ -55,5 +67,7 @@ namespace DeviceControlSystem
             _displayedDevicesIds.Remove(id);
             _listView.Rebuild();
         }
+
+
     }
 }
