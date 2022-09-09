@@ -552,6 +552,7 @@ MonoBehaviour:
   _document: {fileID: 1213618198}
   _deviceNotSelectedLabelName: NoDeviceMessage
   _propertyListName: PropertyList
+  _editorContainerTemplate: {fileID: 9197481963319205126, guid: 4fd32e133f1221f4bb8660a9ab535faf, type: 3}
   _editorTemplates:
   - {fileID: 9197481963319205126, guid: a08d619ce328ac04ab1f2acb5d7862d0, type: 3}
   - {fileID: 9197481963319205126, guid: 835804eaffb69fd4b9f7dad0fdf2742a, type: 3}

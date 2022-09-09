@@ -12,6 +12,7 @@ namespace DeviceControlSystem
         [SerializeField] private UIDocument _document;
         [SerializeField] private string _deviceNotSelectedLabelName;
         [SerializeField] private string _propertyListName;
+        [SerializeField] private VisualTreeAsset _editorContainerTemplate;
         [SerializeField] private List<VisualTreeAsset> _editorTemplates;
 
         private Label _deviceNotSelectedLabel;
@@ -97,8 +98,13 @@ namespace DeviceControlSystem
                 Debug.Log($"Property editor with name {property.EditorName} not found");
                 return;
 			}
-            
-            _propertyList.Add(editor);
+            TemplateContainer editorContainer = _editorContainerTemplate.Instantiate();
+            Foldout foldout = editorContainer.Q<Foldout>("Container");
+
+            foldout.text = property.Description;
+
+            foldout.Add(editor);
+            _propertyList.Add(foldout);
 
             //Setup callbacks
             switch (property.EditorName)
