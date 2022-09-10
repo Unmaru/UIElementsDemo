@@ -49,6 +49,7 @@ namespace DeviceControlSystem.Devices
 					{
 						this.transform.position = _targetPosition.EditedValue; //set current position to destination
 						_targetPosition.IsDirty = false;
+						State = ActionState.Idle;
 					}
 					else
 					{
