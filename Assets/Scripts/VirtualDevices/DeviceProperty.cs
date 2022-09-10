@@ -34,5 +34,24 @@ namespace DeviceControlSystem.Devices
 			_value = value;
 			OnPropertyChanged?.Invoke(this);
 		}
+
+		public void SetOldAndEdited(T value)
+		{
+			_value = value;
+			_editedValue = value;
+			IsDirty = false;
+			OnPropertyChanged?.Invoke(this);
+		}
+
+		// Method group to change values without triggering on change events
+		public void SetValueSilent(T value)
+		{
+			_editedValue = value;
+		}
+
+		public void SetOldValueSilent(T value)
+		{
+			_value = value;
+		}
 	}
 }

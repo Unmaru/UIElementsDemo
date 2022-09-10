@@ -1,4 +1,5 @@
 using DeviceControlSystem.Devices;
+using DeviceControlSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -110,60 +111,13 @@ namespace DeviceControlSystem
             switch (property.EditorName)
 			{
                 case "Vector3Simple":
-                    DeviceProperty<Vector3> p = (DeviceProperty<Vector3>)property;
-                    Vector3 oldValue = p.EditedValue;
-                    var xFieldContent = editor.Q("FieldX");
-                    var xField = xFieldContent.Q<TextField>("FloatField");
-                    xField.value = oldValue.x.ToString();
-                    xField.RegisterValueChangedCallback((newValue) =>
-                    {
-                        if (float.TryParse(newValue.newValue, out oldValue.x))
-                        {
-                            p.SetValue(oldValue);
-                        }
-                    });
-
-                    var yFieldContent = editor.Q("FieldY");
-                    var yField = yFieldContent.Q<TextField>("FloatField");
-                    yField.value = oldValue.y.ToString();
-                    yField.RegisterValueChangedCallback((newValue) =>
-                    {
-                        if (float.TryParse(newValue.newValue, out oldValue.y))
-                        {
-                            p.SetValue(oldValue);
-                        }
-                    });
-
-                    var zFieldContent = editor.Q("FieldZ");
-                    var zField = zFieldContent.Q<TextField>("FloatField");
-                    zField.value = oldValue.z.ToString();
-                    zField.RegisterValueChangedCallback((newValue) =>
-                    {
-                        if (float.TryParse(newValue.newValue, out oldValue.z))
-                        {
-                            p.SetValue(oldValue);
-                        }
-                    });
-
-                    var xCurrentValue = xFieldContent.Q<Label>("Value");
-                    var yCurrentValue = yFieldContent.Q<Label>("Value");
-                    var zCurrentValue = zFieldContent.Q<Label>("Value");
-
-                    Action<DeviceProperty> onValueChange = (p) =>
-                    {
-                        var changedProperty = (DeviceProperty<Vector3>)p;
-                        xField.value = changedProperty.EditedValue.x.ToString();
-                        yField.value = changedProperty.EditedValue.y.ToString();
-                        zField.value = changedProperty.EditedValue.z.ToString();
-
-                        xCurrentValue.text = changedProperty.Value.x.ToString("N5");
-                        yCurrentValue.text = changedProperty.Value.y.ToString("N5");
-                        zCurrentValue.text = changedProperty.Value.z.ToString("N5");
-                    };
-
-                    p.OnPropertyChanged += onValueChange;
-
-                    _registeredExternalCallbacks.Add(new Tuple<DeviceProperty, Action<DeviceProperty>>(p, onValueChange));
+                    UIBinder.BindVector3Simple(property, editor, _registeredExternalCallbacks);
+                    break;
+                case "BoolButton":
+                    UIBinder.BindBoolButton(property, editor);
+                    break;
+                case "StringField":
+                    UIBinder.BindStringField(property, editor, _registeredExternalCallbacks);
                     break;
                 default:
                     break;
