@@ -11,27 +11,34 @@ namespace DeviceControlSystem.Devices
 
 		[SerializeField] private float _speed;
 		private DeviceProperty<Vector3> _targetPosition;
+		private DeviceProperty<Vector3> _currentPosition;
 
 		private ActionState State;
 
-		public override List<DeviceProperty> GetProperties()
+		public override List<DevicePropertyEditor> GetPropertyEditors()
 		{
-			return new List<DeviceProperty>
+			return new List<DevicePropertyEditor>
 			{
-				_targetPosition,
+				new DevicePropertyEditor
+				{
+					Description = "Target Position",
+					EditorName = "Vector3WithPicker",
+					Properties = { _targetPosition, _currentPosition }
+				}
 			};
 		}
 
 		public override void SetupProperties()
 		{
-			_targetPosition = new DeviceProperty<Vector3>() { Description = "Target Position", EditorName = "Vector3WithPicker" };
+			_targetPosition = new DeviceProperty<Vector3>();
+			_currentPosition = new DeviceProperty<Vector3>();
 
 			_targetPosition.OnPropertyChanged += OnTargetPositionChanged;
 		}
 
 		private void OnTargetPositionChanged(DeviceProperty newPos)
 		{
-			Move(_targetPosition.EditedValue);
+			Move(_targetPosition.Value);
 		}
 
 		private void Move(Vector3 position)
@@ -44,10 +51,10 @@ namespace DeviceControlSystem.Devices
 			switch(State)
 			{
 				case ActionState.Moving:
-					Vector3 diff = _targetPosition.EditedValue - this.transform.position;
+					Vector3 diff = _targetPosition.Value - this.transform.position;
 					if (diff.magnitude < _speed * Time.fixedDeltaTime) //if current leap is further than the distance
 					{
-						this.transform.position = _targetPosition.EditedValue; //set current position to destination
+						this.transform.position = _targetPosition.Value; //set current position to destination
 						_targetPosition.IsDirty = false;
 						State = ActionState.Idle;
 					}
@@ -55,7 +62,7 @@ namespace DeviceControlSystem.Devices
 					{
 						this.transform.position += diff.normalized * _speed * Time.fixedDeltaTime; // else just move in direction
 					}
-					_targetPosition.SetOldValue(this.transform.position);
+					_currentPosition.SetValue(this.transform.position);
 					break;
 				default:
 					break;

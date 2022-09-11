@@ -77,11 +77,11 @@ namespace DeviceControlSystem
 
                 //Add new properties
 
-                var properties = device.GetProperties();
+                var propertyEditors = device.GetPropertyEditors();
 
-                for(int i = 0; i < properties.Count; i++)
+                for(int i = 0; i < propertyEditors.Count; i++)
 				{
-                    var p = properties[i];
+                    var p = propertyEditors[i];
                     if (p.EditorName == "") //if the property editor is not specified, then skip property
                         continue;
                     CreatePropertyEditor(p);
@@ -100,42 +100,42 @@ namespace DeviceControlSystem
                 i.Item1.OnPropertyChanged -= i.Item2;
 			}
 		}
-        private void CreatePropertyEditor(DeviceProperty property)
+        private void CreatePropertyEditor(DevicePropertyEditor propertyEditor)
 		{
             TemplateContainer editor = null;
 
             // If the editor with given name doesn't exist, log error and exit
-            if (_editorTemplatesDictionary.TryGetValue(property.EditorName, out var editorTemplate))
+            if (_editorTemplatesDictionary.TryGetValue(propertyEditor.EditorName, out var editorTemplate))
 			{
                 editor = editorTemplate.Instantiate();
             }
             else
 			{
-                Debug.Log($"Property editor with name {property.EditorName} not found");
+                Debug.Log($"Property editor with name {propertyEditor.EditorName} not found");
                 return;
 			}
             TemplateContainer editorContainer = _editorContainerTemplate.Instantiate();
             Foldout foldout = editorContainer.Q<Foldout>("Container");
 
-            foldout.text = property.Description;
+            foldout.text = propertyEditor.Description;
 
             foldout.Add(editor);
             _propertyList.Add(foldout);
 
             //Setup callbacks
-            switch (property.EditorName)
+            switch (propertyEditor.EditorName)
 			{
                 case "Vector3Simple":
-                    UIBinder.BindVector3Simple(property, editor, _registeredExternalCallbacks);
+                    UIBinder.BindVector3Simple(propertyEditor, editor, _registeredExternalCallbacks);
                     break;
                 case "Vector3WithPicker":
-                    UIBinder.BindVector3WithPicker(property, editor, _registeredExternalCallbacks, OnPositionPickerActivated);
+                    UIBinder.BindVector3WithPicker(propertyEditor, editor, _registeredExternalCallbacks, OnPositionPickerActivated);
                     break;
                 case "BoolButton":
-                    UIBinder.BindBoolButton(property, editor);
+                    UIBinder.BindBoolButton(propertyEditor, editor);
                     break;
                 case "StringField":
-                    UIBinder.BindStringField(property, editor, _registeredExternalCallbacks);
+                    UIBinder.BindStringField(propertyEditor, editor, _registeredExternalCallbacks);
                     break;
                 default:
                     break;

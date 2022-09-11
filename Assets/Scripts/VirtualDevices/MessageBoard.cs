@@ -14,30 +14,43 @@ namespace DeviceControlSystem.Devices
 		private DeviceProperty<string> _messageToSend;
 		private DeviceProperty<bool> _sendButton;
 
-		public override List<DeviceProperty> GetProperties()
+		public override List<DevicePropertyEditor> GetPropertyEditors()
 		{
-			return new List<DeviceProperty>
+			// It is possible to achive the same effect with making a custom editor with a field and a button, but for the sake of
+			// the demo let's make it like that, to show the capability of the system to create some custom forms out of predefined editors
+			return new List<DevicePropertyEditor>
 			{
-				_messageToSend,
-				_sendButton
+				new DevicePropertyEditor
+				{
+					Description = "Message:",
+					EditorName = "StringField",
+					Properties = { _messageToSend }
+				},
+				new DevicePropertyEditor
+				{
+					Description = "Send",
+					EditorName = "BoolButton",
+					Properties = { _sendButton }
+				},
 			};
 		}
 
 		public override void SetupProperties()
 		{
-			_messageToSend = new DeviceProperty<string>() { Description = "Message:", EditorName = "StringField" };
-			_sendButton = new DeviceProperty<bool>() { Description = "Send", EditorName = "BoolButton" };
+			_messageToSend = new DeviceProperty<string>();
+			_sendButton = new DeviceProperty<bool>();
+
 			_sendButton.OnPropertyChanged += OnSendMessage;
 		}
 
 		private void OnSendMessage(DeviceProperty msg)
 		{
 			Text messageText = Instantiate(_messagePrefab, _messageContainer);
-			messageText.text = _messageToSend.EditedValue;
+			messageText.text = _messageToSend.Value;
 			LayoutRebuilder.ForceRebuildLayoutImmediate(_messageContainer); //Force layout update
 
 			// Clear the message field and update it
-			_messageToSend.SetOldAndEdited("");			
+			_messageToSend.SetValue("");			
 		}
 	}
 }

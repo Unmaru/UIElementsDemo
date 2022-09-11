@@ -14,9 +14,9 @@ namespace DeviceControlSystem.Devices
         public int Id { get; private set; }
 
         public abstract void SetupProperties();
-        public abstract List<DeviceProperty> GetProperties();
+        public abstract List<DevicePropertyEditor> GetPropertyEditors();
 
-		private void Start()
+        private void Start()
 		{
             Init();
 		}
