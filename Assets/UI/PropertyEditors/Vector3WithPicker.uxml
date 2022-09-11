@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd">
+    <ui:Template name="Vector3Simple" src="project://database/Assets/UI/PropertyEditors/Vector3Simple.uxml?fileID=9197481963319205126&amp;guid=861910055e15f8a40be2ea1cfa3ac821&amp;type=3#Vector3Simple" />
+    <ui:Instance template="Vector3Simple" name="Vector3Simple" />
+    <ui:Button text="Pick from Scene" display-tooltip-when-elided="true" name="PickButton" />
+</ui:UXML>

@@ -103,6 +103,14 @@
     flex-direction: column;
 }
 
-.TextField-two-line > .unity-base-field__input{
+.TextField-two-line > .unity-base-field__input {
     width: 100%;
+}
+
+.ScreenPickerArea {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(100, 164, 255);
+    opacity: 0.1;
 }

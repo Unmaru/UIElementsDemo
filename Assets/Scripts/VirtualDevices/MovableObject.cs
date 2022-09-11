@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DeviceControlSystem.Devices
 {
-	class MovingBox : VirtualDevice
+	class MovableObject : VirtualDevice
 	{
 		private enum ActionState { Idle, Moving};
 
@@ -24,7 +24,7 @@ namespace DeviceControlSystem.Devices
 
 		public override void SetupProperties()
 		{
-			_targetPosition = new DeviceProperty<Vector3>() { Description = "Target Position", EditorName = "Vector3Simple" };
+			_targetPosition = new DeviceProperty<Vector3>() { Description = "Target Position", EditorName = "Vector3WithPicker" };
 
 			_targetPosition.OnPropertyChanged += OnTargetPositionChanged;
 		}

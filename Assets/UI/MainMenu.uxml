@@ -13,4 +13,5 @@
             </ui:GroupBox>
         </ui:GroupBox>
     </ui:GroupBox>
+    <ui:VisualElement name="ScreenPickerArea" class="ScreenPickerArea qwe hidden" />
 </ui:UXML>

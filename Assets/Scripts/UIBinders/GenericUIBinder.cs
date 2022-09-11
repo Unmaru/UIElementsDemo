@@ -11,6 +11,21 @@ namespace DeviceControlSystem
 {
     public static class UIBinder
     {
+        public static void BindVector3WithPicker(
+                DeviceProperty property,
+                TemplateContainer editor,
+                List<Tuple<DeviceProperty, Action<DeviceProperty>>> registeredExternalCallbacks,
+                Action<DeviceProperty<Vector3>> onPositionPickerActivated
+            )
+        {
+            BindVector3Simple(property, editor, registeredExternalCallbacks);
+
+            var pickButton = editor.Q<Button>("PickButton");
+            pickButton.clickable.clicked += () =>
+            {
+                onPositionPickerActivated((DeviceProperty<Vector3>)property);
+            };
+        }
         public static void BindVector3Simple
             (
                 DeviceProperty property,

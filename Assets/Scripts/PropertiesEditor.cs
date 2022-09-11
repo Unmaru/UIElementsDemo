@@ -13,11 +13,17 @@ namespace DeviceControlSystem
         [SerializeField] private UIDocument _document;
         [SerializeField] private string _deviceNotSelectedLabelName;
         [SerializeField] private string _propertyListName;
+        [SerializeField] private string _screenPickerAreaName;
+        [SerializeField] private Transform _screenPickerIndicator;
         [SerializeField] private VisualTreeAsset _editorContainerTemplate;
         [SerializeField] private List<VisualTreeAsset> _editorTemplates;
 
         private Label _deviceNotSelectedLabel;
         private ScrollView _propertyList;
+
+        private VisualElement _screenPickerArea;
+        private DeviceProperty<Vector3> _screenPickerTargetProperty;
+
         private Dictionary<string, VisualTreeAsset> _editorTemplatesDictionary = new Dictionary<string, VisualTreeAsset>();
         //Those callbacks are stored in order to be removed when the editor is closed
         private List<Tuple<DeviceProperty, Action<DeviceProperty>>> _registeredExternalCallbacks = new List<Tuple<DeviceProperty, Action<DeviceProperty>>>();
@@ -31,7 +37,12 @@ namespace DeviceControlSystem
             }
         }
 
-        private void Init()
+		private void OnDestroy()
+		{
+            _screenPickerArea.UnregisterCallback<MouseDownEvent>(OnPositionPicked, TrickleDown.TrickleDown);
+        }
+
+		private void Init()
         {
             // Copy list of templates into dictionary for easier access
             for(int i = 0; i < _editorTemplates.Count; i++)
@@ -43,6 +54,10 @@ namespace DeviceControlSystem
             _propertyList = (ScrollView)_document.rootVisualElement.Q(_propertyListName);
             _deviceNotSelectedLabel.Show();
             _propertyList.Hide();
+
+            _screenPickerArea = _document.rootVisualElement.Q(_screenPickerAreaName);
+            _screenPickerArea.RegisterCallback<MouseDownEvent>(OnPositionPicked, TrickleDown.TrickleDown);
+            _screenPickerIndicator.gameObject.SetActive(false);
 
             DeviceController.Instance.OnSelectedDeviceChanged += OnDeviceSelectionChange;
         }
@@ -113,6 +128,9 @@ namespace DeviceControlSystem
                 case "Vector3Simple":
                     UIBinder.BindVector3Simple(property, editor, _registeredExternalCallbacks);
                     break;
+                case "Vector3WithPicker":
+                    UIBinder.BindVector3WithPicker(property, editor, _registeredExternalCallbacks, OnPositionPickerActivated);
+                    break;
                 case "BoolButton":
                     UIBinder.BindBoolButton(property, editor);
                     break;
@@ -122,6 +140,20 @@ namespace DeviceControlSystem
                 default:
                     break;
 			}           
+        }
+
+        private void OnPositionPickerActivated(DeviceProperty<Vector3> targetProperty)
+		{
+            _screenPickerArea.Show();
+            _screenPickerTargetProperty = targetProperty;
+            _screenPickerIndicator.gameObject.SetActive(true);
+		}
+
+        private void OnPositionPicked(MouseDownEvent evt)
+        {
+            _screenPickerIndicator.gameObject.SetActive(false);
+            _screenPickerArea.Hide();
+            _screenPickerTargetProperty.SetValue(_screenPickerIndicator.position);          
         }
     }
 }
