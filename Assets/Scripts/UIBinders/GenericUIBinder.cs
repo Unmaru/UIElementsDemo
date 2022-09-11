@@ -83,6 +83,8 @@ namespace DeviceControlSystem
 
             var button = editor.Q<Button>("Button");
 
+            button.text = p.Description;
+
             button.clickable.clicked += () =>
             {
                 p.SetValue(true);
