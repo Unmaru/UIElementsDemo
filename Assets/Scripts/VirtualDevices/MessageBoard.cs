@@ -23,13 +23,13 @@ namespace DeviceControlSystem.Devices
 				new DevicePropertyEditor
 				{
 					Description = "Message:",
-					EditorName = "StringField",
+					EditorName = UIPropertyEditorComponents.StringField,
 					Properties = { _messageToSend }
 				},
 				new DevicePropertyEditor
 				{
 					Description = "Send",
-					EditorName = "BoolButton",
+					EditorName = UIPropertyEditorComponents.BoolButton,
 					Properties = { _sendButton }
 				},
 			};

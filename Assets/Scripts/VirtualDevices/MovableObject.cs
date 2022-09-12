@@ -22,7 +22,7 @@ namespace DeviceControlSystem.Devices
 				new DevicePropertyEditor
 				{
 					Description = "Target Position",
-					EditorName = "Vector3WithPicker",
+					EditorName = UIPropertyEditorComponents.Vector3WithPicker,
 					Properties = { _targetPosition, _currentPosition }
 				}
 			};

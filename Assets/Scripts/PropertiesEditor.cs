@@ -125,16 +125,16 @@ namespace DeviceControlSystem
             //Setup callbacks
             switch (propertyEditor.EditorName)
 			{
-                case "Vector3Simple":
+                case UIPropertyEditorComponents.Vector3Simple:
                     UIBinder.BindVector3Simple(propertyEditor, editor, _registeredExternalCallbacks);
                     break;
-                case "Vector3WithPicker":
+                case UIPropertyEditorComponents.Vector3WithPicker:
                     UIBinder.BindVector3WithPicker(propertyEditor, editor, _registeredExternalCallbacks, OnPositionPickerActivated);
                     break;
-                case "BoolButton":
+                case UIPropertyEditorComponents.BoolButton:
                     UIBinder.BindBoolButton(propertyEditor, editor);
                     break;
-                case "StringField":
+                case UIPropertyEditorComponents.StringField:
                     UIBinder.BindStringField(propertyEditor, editor, _registeredExternalCallbacks);
                     break;
                 default:
