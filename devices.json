@@ -1,0 +1,84 @@
+{
+    "Devices": [
+        {
+            "rid": 1000
+        },
+        {
+            "rid": 1001
+        },
+        {
+            "rid": 1002
+        }
+    ],
+    "references": {
+        "version": 2,
+        "RefIds": [
+            {
+                "rid": 1000,
+                "type": {
+                    "class": "MessageBoardSaveData",
+                    "ns": "DeviceControlSystem.Devices.SaveData",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "Id": "91d78b02-247a-40e4-81d5-485c615d6f5e",
+                    "VirtualDeviceType": "MessageBoard",
+                    "CurrentPosition": {
+                        "x": -3.4200000762939455,
+                        "y": 2.5,
+                        "z": 4.289999961853027
+                    },
+                    "Messages": [
+                        "qwe",
+                        "qweqweqwe",
+                        "qweqwe"
+                    ]
+                }
+            },
+            {
+                "rid": 1001,
+                "type": {
+                    "class": "MovableObjectSaveData",
+                    "ns": "DeviceControlSystem.Devices.SaveData",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "Id": "60fd3534-eafd-47e7-b765-34b31cc952ba",
+                    "VirtualDeviceType": "MovableObject",
+                    "CurrentPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    },
+                    "TargetPosition": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                    }
+                }
+            },
+            {
+                "rid": 1002,
+                "type": {
+                    "class": "MovableObjectSaveData",
+                    "ns": "DeviceControlSystem.Devices.SaveData",
+                    "asm": "Assembly-CSharp"
+                },
+                "data": {
+                    "Id": "7d303a13-0ef7-4a0f-8ca0-a1eae957c066",
+                    "VirtualDeviceType": "MovableObject",
+                    "CurrentPosition": {
+                        "x": 3.432866096496582,
+                        "y": 1.0,
+                        "z": 4.386545181274414
+                    },
+                    "TargetPosition": {
+                        "x": 3.432866096496582,
+                        "y": 1.0,
+                        "z": 4.386545181274414
+                    }
+                }
+            }
+        ]
+    }
+}

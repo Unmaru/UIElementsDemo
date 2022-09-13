@@ -1,9 +1,12 @@
+using DeviceControlSystem.Devices.SaveData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace DeviceControlSystem.Devices
 {
+    [Serializable]
     public abstract class VirtualDevice : MonoBehaviour
     {
         
@@ -11,38 +14,56 @@ namespace DeviceControlSystem.Devices
 
         protected DeviceStatus Status = DeviceStatus.Offline;
 
-        public int Id { get; private set; }
+        private bool _isInitialized = false;
+
+        public string Id { get; protected set; } = "";
 
         public abstract void SetupProperties();
         public abstract List<DevicePropertyEditor> GetPropertyEditors();
+        public abstract VirtualDeviceSaveData GetDeviceSaveData();
+        protected abstract void SetDeviceSaveDataInternal(VirtualDeviceSaveData data);
 
         private void Start()
 		{
-            Init();
+            if (!_isInitialized)
+            {
+                Init(null);
+            }
 		}
         private void OnDestroy()
         {
             Destroy();
         }
 
-        private void Init()
+        public void Init(VirtualDeviceSaveData data)
 		{
             SetupProperties();
-            Id = DeviceController.Instance.RegisterDevice(this);           
+
+            if (data != null)
+            {
+                SetDeviceSaveData(data);
+            }
+
+            Id = DeviceController.Instance.RegisterDevice(this);
+
+            _isInitialized = true;
+        }
+
+        public bool SetDeviceSaveData(VirtualDeviceSaveData data)
+		{
+            if(data.VirtualDeviceType != this.GetType().Name) //Check if the data type is matching this device
+			{
+                return false;
+			}
+			{
+                SetDeviceSaveDataInternal(data);
+                return true;
+			}
 		}
 
         private void Destroy()
 		{
             DeviceController.Instance.RemoveDevice(Id);
         }
-
-		public string ToJSON() 
-        {
-            return JsonUtility.ToJson(this);
-        }
-        public void FromJSON(string json)
-		{
-            JsonUtility.FromJsonOverwrite(json, this);
-		}
 	}
 }

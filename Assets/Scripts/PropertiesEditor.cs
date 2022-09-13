@@ -62,7 +62,7 @@ namespace DeviceControlSystem
             DeviceController.Instance.OnSelectedDeviceChanged += OnDeviceSelectionChange;
         }
 
-        private void OnDeviceSelectionChange(int deviceId)
+        private void OnDeviceSelectionChange(string deviceId)
 		{
             var device = DeviceController.Instance.GetDevice(deviceId);
             if (device != null)

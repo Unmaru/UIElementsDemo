@@ -3,7 +3,12 @@
     <ui:GroupBox name="Screen" class="MenuLayout" style="width: 100%; height: 100%; flex-direction: row-reverse; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;">
         <ui:GroupBox name="SidePanel" class="MenuLayout PanelBackground" style="width: 40%; margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0; padding-left: 0;">
             <ui:GroupBox name="DeviceArea" style="width: 40%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-top: 5px; padding-right: 3px;">
-                <ui:Label text="Devices:" display-tooltip-when-elided="true" name="DevicesHeader" class="Header1" />
+                <ui:GroupBox class="DevicesHeaderArea">
+                    <ui:Label text="Devices" display-tooltip-when-elided="true" name="DevicesHeader" class="Header1" />
+                    <ui:Button display-tooltip-when-elided="true" name="RefreshButton" class="DeviceButton" style="background-image: url(&apos;project://database/Assets/Sprites/UI/Refresh.png?fileID=2800000&amp;guid=8ef890a394659e049b3d91ed74874353&amp;type=3#Refresh&apos;);" />
+                    <ui:Button display-tooltip-when-elided="true" name="SaveButton" class="DeviceButton" style="background-image: url(&apos;project://database/Assets/Sprites/UI/Save.png?fileID=2800000&amp;guid=0adb0cd704b3ea645a18240d2520d5b5&amp;type=3#Save&apos;);" />
+                    <ui:Button display-tooltip-when-elided="true" name="EditButton" class="DeviceButton" style="background-image: url(&apos;project://database/Assets/Sprites/UI/Edit.png?fileID=2800000&amp;guid=3c2eb68984661a746902ffa450233601&amp;type=3#Edit&apos;);" />
+                </ui:GroupBox>
                 <ui:ListView focusable="true" name="DeviceList" style="width: 100%; height: 100%;" />
             </ui:GroupBox>
             <ui:GroupBox name="PropertyArea" style="width: 60%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-top: 5px;">

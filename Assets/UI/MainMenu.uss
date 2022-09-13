@@ -3,6 +3,10 @@
 }
 
 .unity-collection-view__item--selected {
+    background-color: rgb(58, 95, 156);
+}
+
+.unity-collection-view__item:hover {
     background-color: rgb(62, 138, 189);
 }
 
@@ -113,4 +117,43 @@
     height: 100%;
     background-color: rgb(100, 164, 255);
     opacity: 0.1;
+}
+
+.DeviceButton {
+    margin-left: 0;
+    margin-right: 3px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 15px;
+    width: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(38, 35, 35, 0);
+    border-right-color: rgba(38, 35, 35, 0);
+    border-top-color: rgba(38, 35, 35, 0);
+    border-bottom-color: rgba(38, 35, 35, 0);
+}
+
+.DeviceButton:hover {
+    background-color: rgba(58, 95, 156, 255);
+    border-left-color: rgba(100, 164, 255, 0);
+    border-right-color: rgba(100, 164, 255, 0);
+    border-top-color: rgba(100, 164, 255, 0);
+    border-bottom-color: rgba(100, 164, 255, 0);
+}
+
+.DevicesHeaderArea {
+    flex-direction: row;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
 }

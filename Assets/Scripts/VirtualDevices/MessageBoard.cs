@@ -1,4 +1,5 @@
 ﻿
+using DeviceControlSystem.Devices.SaveData;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace DeviceControlSystem.Devices
 
 		private DeviceProperty<string> _messageToSend;
 		private DeviceProperty<bool> _sendButton;
+
+		private List<Text> _messages = new List<Text>();
 
 		public override List<DevicePropertyEditor> GetPropertyEditors()
 		{
@@ -43,13 +46,62 @@ namespace DeviceControlSystem.Devices
 			_sendButton.OnPropertyChanged += OnSendMessage;
 		}
 
-		private void OnSendMessage(DeviceProperty msg)
+		public override VirtualDeviceSaveData GetDeviceSaveData()
+		{
+			string[] messages = new string[_messages.Count];
+			for(int i = 0; i < _messages.Count; i++)
+			{
+				messages[i] = _messages[i].text;
+			}
+
+			return new MessageBoardSaveData
+			{
+				Id = this.Id,
+				VirtualDeviceType = this.GetType().Name,
+				CurrentPosition = this.transform.position,
+				Messages = messages
+			};
+		}
+
+		protected override void SetDeviceSaveDataInternal(VirtualDeviceSaveData deviceData)
+		{
+			var data = (MessageBoardSaveData)deviceData;
+
+			this.Id = data.Id;
+
+			transform.position = data.CurrentPosition;
+
+			ClearMessages();
+
+			for (int i = 0; i < data.Messages.Length; i++)
+			{
+				AddMessage(data.Messages[i]);
+			}
+		}
+
+		public void AddMessage(string message)
 		{
 			Text messageText = Instantiate(_messagePrefab, _messageContainer);
-			messageText.text = _messageToSend.Value;
+			messageText.text = message;
 			LayoutRebuilder.ForceRebuildLayoutImmediate(_messageContainer); //Force layout update
 
-			// Clear the message field and update it
+			_messages.Add(messageText);
+		}
+
+		public void ClearMessages()
+		{
+			for(int i = 0; i < _messages.Count; i++)
+			{
+				Destroy(_messages[i].gameObject);
+			}
+			_messages.Clear();
+		}
+
+		private void OnSendMessage(DeviceProperty msg)
+		{
+			AddMessage(_messageToSend.Value);
+
+			// Clear the message field
 			_messageToSend.SetValue("");			
 		}
 	}

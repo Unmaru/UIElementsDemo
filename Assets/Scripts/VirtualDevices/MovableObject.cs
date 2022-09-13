@@ -1,4 +1,5 @@
 ﻿
+using DeviceControlSystem.Devices.SaveData;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,28 @@ namespace DeviceControlSystem.Devices
 			_currentPosition = new DeviceProperty<Vector3>();
 
 			_targetPosition.OnPropertyChanged += OnTargetPositionChanged;
+		}
+
+		public override VirtualDeviceSaveData GetDeviceSaveData()
+		{
+			return new MovableObjectSaveData
+			{
+				Id = this.Id,
+				VirtualDeviceType = this.GetType().Name,
+				CurrentPosition = _currentPosition.Value,
+				TargetPosition = _targetPosition.Value
+			};
+		}
+
+		protected override void SetDeviceSaveDataInternal(VirtualDeviceSaveData deviceData)
+		{
+			var data = (MovableObjectSaveData)deviceData;
+
+			this.Id = data.Id;
+			_currentPosition.Value = data.CurrentPosition;
+			_targetPosition.Value = data.TargetPosition;
+
+			transform.position = data.CurrentPosition;
 		}
 
 		private void OnTargetPositionChanged(DeviceProperty newPos)
